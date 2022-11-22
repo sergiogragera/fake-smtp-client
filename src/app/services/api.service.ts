@@ -8,7 +8,7 @@ import { EmailResponse, PageResponse } from './api.interface';
 })
 export class ApiService {
   
-  private apiUrl = 'http://fakesmtp:5080/api';
+  private apiUrl = 'http://localhost:5080/api';
   
   constructor(private http: HttpClient) { }
 

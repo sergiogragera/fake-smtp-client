@@ -5,10 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EmailListComponent } from './pages/email-list/email-list.page';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmailListComponent
   ],
   imports: [
     BrowserModule,

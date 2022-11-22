@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col">
+        <h1><i class="material-icons">inbox</i>Inbox</h1>
+        <div *ngIf="data$ | async as page">
+            <!-- <button class="btn btn-primary" (click)="refresh()"><i class="material-icons left">refresh</i><span>Refresh</span></button> -->
+            <span *ngIf="page.totalElements === 0">
+                <div class="alert alert-info" role="alert">No emails available.</div>
+            </span>
+            <span *ngIf="page.totalElements > 0">
+                <button class="btn btn-danger" (click)="deleteAllEmails()"><i class="material-icons left">delete</i><span>Delete All</span></button>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Received On</th>
+                        <th>Subject</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let email of page.content">
+                        <td>{{email.id}}</td>
+                        <td>{{email.fromAddress}}</td>
+                        <td>{{email.toAddress}}</td>
+                        <td>{{email.receivedOn}}</td>
+                        <td>{{email.subject}}</td>
+                        <td>
+                            <a class="btn btn-primary" alt="Details" [routerLink]="['/', email.id]"><i class="material-icons">email</i></a>
+                            <span>
+                                <button class="btn btn-danger" (click)="deleteEmail(email.id)"><i class="material-icons">delete</i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-5">
+                        <p>
+                            <span class="small">Page&nbsp;</span>
+                            <span class="badge bg-secondary">{{page.number + 1}}</span>
+                            <span class="small">&nbsp;of&nbsp;</span>
+                            <span class="badge bg-secondary">{{page.totalPages}}</span>
+                        </p>
+                    </div>
+
+                    <div class="col-7">
+                        <nav>
+                            <ul class='pagination float-end'>
+                                <li class="page-item" [ngClass]="{
+                                   'disabled': page.first
+                                }">
+                                    <a *ngIf="page.first" class="page-link"><i class="material-icons">first_page</i></a>
+                                    <a *ngIf="!page.first" class="page-link" (click)="goToPage(0)" title="Go to first page"><i class="material-icons">first_page</i></a>
+                                </li>
+                                <li class="page-item" [ngClass]="{
+                                    'disabled': !page.hasPrevious
+                                }">
+                                    <a *ngIf="!page.hasPrevious" class="page-link"><i class="material-icons">navigate_before</i></a>
+                                    <a *ngIf="page.hasPrevious" class="page-link" (click)="prevPage()" title='Go to previous page'><i class="material-icons">navigate_before</i></a>
+                                </li>
+                                <li class="page-item" [ngClass]="{
+                                    'disabled': !page.hasNext
+                                }">
+                                    <a *ngIf="!page.hasNext" class="page-link"><i class="material-icons">navigate_next</i></a>
+                                    <a *ngIf="page.hasNext" class="page-link" (click)="nextPage()" title='Go to next page'><i class="material-icons">navigate_next</i></a>
+                                </li>
+                                <li class="page-item" [ngClass]="{
+                                    'disabled':  page.last
+                                }">
+                                    <a *ngIf="page.last" class="page-link"><i class="material-icons">last_page</i></a>
+                                    <a *ngIf="!page.last" class="page-link" (click)="goToPage(page.totalPages - 1)" title="Go to last page"><i class="material-icons">last_page</i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
