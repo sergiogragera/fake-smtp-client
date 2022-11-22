@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   fakesmtp:
-    image: gessnerfl/fake-smtp-server:latest
+    image: sergiogragera/fake-smtp-server:latest
     container_name: fakesmtp
     hostname: fakesmtp
     ports:
