@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col">
+        <div *ngIf="data$ | async as mail" class="card">
+            <div class="card-header">
+                <span class="card-title"><i class="material-icons" style="vertical-align: bottom;">email</i>&nbsp;Email&nbsp;<span>{{mail.id}}</span></span>
+                <a class="btn-close float-end" aria-label="Close" [routerLink]="['/']"></a>
+            </div>
+            <div class="card-body p-0">
+                <dl class="row p-3">
+                    <dt class="col-sm-2">From:</dt>
+                    <dd class="col-sm-10">{{mail.fromAddress}}</dd>
+                    <dt class="col-sm-2">To:</dt>
+                    <dd class="col-sm-10">{{mail.toAddress}}</dd>
+                    <dt class="col-sm-2">Received On:</dt>
+                    <dd class="col-sm-10">{{mail.receivedOn}}</dd>
+                    <dt class="col-sm-2">Subject:</dt>
+                    <dd class="col-sm-10">{{mail.subject}}</dd>
+                </dl>
+
+                <ul class="nav nav-tabs" id="mail-tabs" role="tablist">
+                    <li class="nav-item" role="presentation" *ngFor="let content of mail.contents; let index=index; let first=first">
+                        <button class="nav-link" [ngClass]="{ 'active': first }" data-bs-toggle="tab" [attr.data-bs-target]="'#mail-content-' + index">{{content.contentType}}</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#mail-content-raw">Raw</button>
+                    </li>
+                </ul>
+                <div class="tab-content p-3" id="mail-tabs-content">
+                    <div class="tab-pane fade" [ngClass]="{ 'show active': first }" id="mail-content-1" *ngFor="let content of mail.contents; let index=index; let first=first" [attr.id]="'mail-content-' + index">
+                        <div *ngIf="content.contentType === 'PLAIN'" class="w-100" th:utext="${@htmlContentRenderer.render(c)}">{{content.data}}</div>
+                        <iframe *ngIf="content.contentType !== 'PLAIN'" class="w-100" th:attr="srcdoc=${@htmlContentRenderer.render(c)}" sandbox="allow-same-origin" onload="resizeIframe(this)">{{content.data}}</iframe>
+                    </div>
+                    <div class="tab-pane fade" id="mail-content-raw">
+                        <pre class="card-content">{{mail.rawData}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" *ngIf="mail.attachments.length > 0">
+                <a th:href="@{|/api/email/${mail.id}/attachment/${a.id}|}" *ngFor="let attachment of mail.attachments">
+                    <i class="material-icons tiny blue-text">attach_file</i>
+                    <span class="blue-text no-uppercase">{{attachment.filename}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

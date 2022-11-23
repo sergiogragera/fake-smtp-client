@@ -6,11 +6,13 @@ import { ApiService } from './services/api.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmailListComponent } from './pages/email-list/email-list.page';
+import { EmailComponent } from './pages/email/email.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmailListComponent
+    EmailListComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
