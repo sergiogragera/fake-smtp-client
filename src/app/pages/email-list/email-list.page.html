@@ -2,7 +2,6 @@
     <div class="col">
         <h1><i class="material-icons">inbox</i>Inbox</h1>
         <div *ngIf="data$ | async as page">
-            <!-- <button class="btn btn-primary" (click)="refresh()"><i class="material-icons left">refresh</i><span>Refresh</span></button> -->
             <span *ngIf="page.totalElements === 0">
                 <div class="alert alert-info" role="alert">No emails available.</div>
             </span>

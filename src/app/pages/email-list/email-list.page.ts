@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { Page } from 'src/app/model/page';
 import { PageResponse } from 'src/app/services/api.interface';
@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './email-list.page.html',
   styleUrls: ['./email-list.page.scss']
 })
-export class EmailListComponent {
+export class EmailListComponent implements OnDestroy {
 
   currentPage$ = new BehaviorSubject<number>(0);
 
@@ -21,6 +21,10 @@ export class EmailListComponent {
   );
 
   constructor(private apiService: ApiService) {}
+
+  ngOnDestroy(): void {
+   this.currentPage$.complete();
+  }
 
   refresh() {
     this.currentPage$.next(0);
