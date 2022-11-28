@@ -24,11 +24,11 @@
                         <td>{{email.id}}</td>
                         <td>{{email.fromAddress}}</td>
                         <td>{{email.toAddress}}</td>
-                        <td>{{email.receivedOn}}</td>
+                        <td>{{email.receivedOn | date:'YYYY-MM-dd HH:mm:ss'}}</td>
                         <td>{{email.subject}}</td>
                         <td>
                             <a class="btn btn-primary" alt="Details" [routerLink]="['/', email.id]"><i class="material-icons">email</i></a>
-                            <span>
+                            <span class="inline">
                                 <button class="btn btn-danger" (click)="deleteEmail(email.id)"><i class="material-icons">delete</i></button>
                             </span>
                         </td>

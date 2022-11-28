@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getEmails(page: number): Observable<PageResponse> {
-    return this.http.get<PageResponse>(`${this.apiUrl}/email?page=${page}&size=2&sort=DESC`);
+    return this.http.get<PageResponse>(`${this.apiUrl}/email?page=${page}`);
   }
 
   getEmail(id: string): Observable<EmailResponse> {

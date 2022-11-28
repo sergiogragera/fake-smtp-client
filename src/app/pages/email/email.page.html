@@ -12,7 +12,7 @@
                     <dt class="col-sm-2">To:</dt>
                     <dd class="col-sm-10">{{mail.toAddress}}</dd>
                     <dt class="col-sm-2">Received On:</dt>
-                    <dd class="col-sm-10">{{mail.receivedOn}}</dd>
+                    <dd class="col-sm-10">{{mail.receivedOn | date:'YYYY-MM-dd HH:mm:ss'}}</dd>
                     <dt class="col-sm-2">Subject:</dt>
                     <dd class="col-sm-10">{{mail.subject}}</dd>
                 </dl>
@@ -35,8 +35,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer" *ngIf="mail.attachments.length > 0">
-                <a th:href="@{|/api/email/${mail.id}/attachment/${a.id}|}" *ngFor="let attachment of mail.attachments">
+            <div class="card-footer"  *ngIf="mail.attachments.length > 0">
+                <a [routerLink]="['/', mail.id, 'attachment', attachment.id]" *ngFor="let attachment of mail.attachments">
                     <i class="material-icons tiny blue-text">attach_file</i>
                     <span class="blue-text no-uppercase">{{attachment.filename}}</span>
                 </a>
