@@ -1,27 +1,27 @@
-# FakeSmtpClient
+# Fake SMTP Angular Client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+*Simple SMTP Client which manage emails received in Fake SMTP Server*
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This is a simple Angular client of [Fake SMTP Server](https://github.com/gessnerfl/fake-smtp-server).
 
-## Code scaffolding
+# Running Fake SMTP Server locally
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Note:** You need Node 14 installed to run Fake SMTP Client. 
 
-## Build
+## Run SMTP Server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run dockerized SMTP Server image
+   
+```
+docker-compose up -d
+```
 
-## Running unit tests
+## Run SMTP Client from sources
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In order to run this application locally from sources, execute:
 
-## Running end-to-end tests
+    yarn start
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Afterwards, the web interface is be availabe under http://localhost:4200.
